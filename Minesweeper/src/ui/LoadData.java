@@ -17,8 +17,8 @@ public class LoadData {
         try {
             BufferedImage image = ImageIO.read(new File("assets/minesweeper.png"));
 
+            // the title
             listImage.put("Title", image.getSubimage(0, 84, 114, 25));
-            listImage.put("Smile", image.getSubimage(0, 55, 26, 26));
 
             // the number for time and the residual of mines
             listImage.put("0", image.getSubimage(0, 0, 13, 23));
@@ -53,6 +53,12 @@ public class LoadData {
             listImage.put("BoomX", image.getSubimage(48, 39, 16, 16));
             listImage.put("Boom", image.getSubimage(64, 39, 16, 16));
 
+            // the smile
+            listImage.put("Smile", image.getSubimage(0, 55, 26, 26));
+            listImage.put("SmilePress", image.getSubimage(26, 55, 26, 26));
+            listImage.put("SmilePressPlay", image.getSubimage(52, 55, 26, 26));
+            listImage.put("SmileLose", image.getSubimage(78, 55, 26, 26));
+            listImage.put("SmileWin", image.getSubimage(104, 55, 26, 26));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

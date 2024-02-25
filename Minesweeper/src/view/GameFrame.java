@@ -15,7 +15,7 @@ public class GameFrame extends JFrame {
 
         gamePanel = new GamePanel(w,h,mine, this);
 
-
+        gamePanel.getNotification().getSmileButton().setStage(SmileButton.now);
         setTitle("Minesweeper");
         add(gamePanel);
         setIconImage(loadData.getListImage().get("Title"));

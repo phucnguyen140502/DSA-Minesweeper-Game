@@ -105,20 +105,29 @@ public class GamePanel extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        notification.getSmileButton().setStage(SmileButton.wow);
+        notification.getSmileButton().repaint();
+
         CellButtons[][] resMarked = player.getResMarked();
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 if (e.getButton() == 1 && e.getSource() == resMarked[i][j] && !work.getSetFlagVisited()[i][j]) { // right mouse
+                    if (!notification.getTime().isRunning()) {
+                        notification.getTime().start();
+                    }
+
                     if (!work.open(i, j)) {
-                        if (!notification.getTime().isRunning()) {
-                            notification.getTime().start();
-                        }
+
                         // Lost
                         if (work.isCompleted()) {
 
                             notification.getTime().stop();
 
-                            int option = JOptionPane.showConfirmDialog(this, "You Lost, play again?", "Notification",
+                            notification.getSmileButton().setStage(SmileButton.lose);
+                            notification.getSmileButton().repaint();
+
+                            int option = JOptionPane.showConfirmDialog(this,
+                                    "You Lost, play again?", "Notification",
                                     JOptionPane.YES_NO_OPTION);
                             if (option == JOptionPane.YES_OPTION) {
                                 gameFrame.setVisible(false);
@@ -128,8 +137,14 @@ public class GamePanel extends JPanel implements MouseListener {
                             }
                             // Win
                         } else if (work.isEnd()) {
+
                             notification.getTime().stop();
-                            int option = JOptionPane.showConfirmDialog(this, "You Win, play again?", "Notification",
+
+                            notification.getSmileButton().setStage(SmileButton.win);
+                            notification.getSmileButton().repaint();
+
+                            int option = JOptionPane.showConfirmDialog(this,
+                                    "You Win, play again?", "Notification",
                                     JOptionPane.YES_NO_OPTION);
                             if (option == JOptionPane.YES_OPTION) {
                                 gameFrame.setVisible(false);
@@ -137,10 +152,16 @@ public class GamePanel extends JPanel implements MouseListener {
                             }
                         }
                     }
-                } if (e.getButton() == 2 && e.getSource() == resMarked[i][j] && !work.getVisited()[i][j]) { // click Double
+                } if (e.getButton() == 2 && e.getSource() == resMarked[i][j]
+                        && !work.getVisited()[i][j]) { // click Double
                     if (!work.clickDouble(i, j)) {
+
                         notification.getTime().stop();
-                        int option = JOptionPane.showConfirmDialog(this, "You Lost, play again?", "Notification",
+                        notification.getSmileButton().setStage(SmileButton.lose);
+                        notification.getSmileButton().repaint();
+
+                        int option = JOptionPane.showConfirmDialog(this,
+                                "You Lost, play again?", "Notification",
                                 JOptionPane.YES_NO_OPTION);
                         if (option == JOptionPane.YES_OPTION) {
                             gameFrame.setVisible(false);
@@ -158,7 +179,8 @@ public class GamePanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        notification.getSmileButton().setStage(SmileButton.now);
+        notification.getSmileButton().repaint();
     }
 
     @Override

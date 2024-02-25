@@ -9,11 +9,11 @@ public class GameFrame extends JFrame {
     private LoadData loadData;
 
     private GamePanel gamePanel;
-    public GameFrame(){
+    public GameFrame(int w, int h, int mine){
 
         loadData = new LoadData();
 
-        gamePanel = new GamePanel(9,9,0, this);
+        gamePanel = new GamePanel(w,h,mine, this);
 
 
         setTitle("Minesweeper");

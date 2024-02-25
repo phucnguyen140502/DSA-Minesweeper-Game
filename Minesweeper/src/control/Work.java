@@ -1,9 +1,14 @@
 package control;
 
 import view.CellButtons;
+
 import view.GamePanel;
 import view.LabelNumber;
 import view.SmileButton;
+
+import view.LabelNumber;
+import view.SmileButton;
+
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -11,6 +16,7 @@ import java.util.Queue;
 import java.util.Random;
 
 // Apply BFS ( Breadth-First Search)
+
 public class Work {
 
     private Random random; // mine is -1
@@ -22,6 +28,7 @@ public class Work {
     private SmileButton smileButton;
 
     private LabelNumber labelTime, labelResMine;
+
 
     private boolean[][] visited;
     private final boolean[][] setFlagVisited;
@@ -46,13 +53,18 @@ public class Work {
         for (int j = 0; j < w; j++) {
             Arrays.fill(visited[j], false);
             Arrays.fill(setFlagVisited[j], false);
+
         }
 
         random = new Random();
 
+
         createMineField();
 
         FillNumber();
+
+
+
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
@@ -68,6 +80,7 @@ public class Work {
 //            System.out.println();
 //        }
     }
+
 
     public boolean clickDouble(int i, int j) {
 
@@ -132,26 +145,31 @@ public class Work {
     public boolean open(int i, int j) {
 
         if (!isCompleted && !isEnd) {
+
+
             if (visited[i][j]) {
-                if (mineField[i][j]  == 0) { // open around until the cells have mines around
+                if (mineField[i][j] == 0) { // open around until the cells have mines around
 
                     visited[i][j] = false;
                     mineFieldContainer[i][j].setNumber(0);
                     mineFieldContainer[i][j].repaint();
+
                     if (isWin()) {
                         isEnd = true;
 
                         return false;
                     }
 
-                    int[] drow = new int[]{0,0,-1,1,1,-1,1,-1};
-                    int[] dcol = new int[]{-1,1,0,0,1,-1,-1,1};
+
+                    int[] drow = new int[]{0, 0, -1, 1, 1, -1, 1, -1};
+                    int[] dcol = new int[]{-1, 1, 0, 0, 1, -1, -1, 1};
 
                     for (int k = 0; k < 8; k++) {
                         int x = i + drow[k];
                         int y = j + dcol[k];
+
                         if (isValid(x, y) && visited[x][y]) {
-                            open(x,y);
+                            open(x, y);
                         }
                     }
                     if (isWin()) {
@@ -159,14 +177,13 @@ public class Work {
 
                         return false;
                     }
-
-
                 } else {
                     visited[i][j] = false;
                     int num = mineField[i][j];
                     if (num != -1) {
                         mineFieldContainer[i][j].setNumber(num);
                         mineFieldContainer[i][j].repaint();
+
 
                         if (isWin()) {
                             isEnd = true;
@@ -197,7 +214,7 @@ public class Work {
                 }
                 return false;
 
-            } else{
+            } else {
                 if (isWin()) {
                     isEnd = true;
 
@@ -206,10 +223,12 @@ public class Work {
 
                 return true;
             }
+
         }
         return false;
 
     }
+
 
     public boolean isWin() {
         int count = 0;
@@ -228,6 +247,7 @@ public class Work {
         return (0 <= ux && ux < w) && (0<=vy && vy < h);
     }
     public void FillNumber(){
+
         Queue<Cells> queue = new LinkedList<>();
 
         Cells start = new Cells(0, 0);
@@ -250,9 +270,11 @@ public class Work {
             for (int i = 0; i < 8; i++) {
                 int ux = u + drow[i];
                 int vy = v + dcol[i];
+
                 if (isValid(ux, vy) && mineField[ux][vy] == -1) {
                     countMines++;
                 } else if (isValid(ux, vy) && mineField[ux][vy] == 0 && !visited[ux][vy]) {
+
                     queue.add(new Cells(ux, vy));
                     visited[ux][vy] = true;
                 }
@@ -267,6 +289,7 @@ public class Work {
 
 
     public void createMineField(){
+
         int count;
         do{
             int locationX = random.nextInt(w);
@@ -331,6 +354,7 @@ public class Work {
         isCompleted = completed;
     }
 
+
     public boolean isEnd() {
         return isEnd;
     }
@@ -358,4 +382,5 @@ public class Work {
     public int getFlag() {
         return Flag;
     }
+
 }

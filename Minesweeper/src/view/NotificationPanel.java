@@ -164,4 +164,6 @@ public class NotificationPanel extends JPanel {
     public void setSmileButton(SmileButton smileButton) {
         this.smileButton = smileButton;
     }
+
+
 }

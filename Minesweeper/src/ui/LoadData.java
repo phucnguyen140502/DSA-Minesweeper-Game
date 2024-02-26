@@ -59,6 +59,9 @@ public class LoadData {
             listImage.put("SmilePressPlay", image.getSubimage(52, 55, 26, 26));
             listImage.put("SmileLose", image.getSubimage(78, 55, 26, 26));
             listImage.put("SmileWin", image.getSubimage(104, 55, 26, 26));
+
+            //
+            listImage.put("tich", image.getSubimage(140, 49, 7, 7));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

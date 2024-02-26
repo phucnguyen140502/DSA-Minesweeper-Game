@@ -7,19 +7,22 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GamePanel extends JPanel implements MouseListener {
+public class GamePanel extends JPanel implements MouseListener{
 
 
     private NotificationPanel notification;
 
-    private GameFrame gameFrame;
     private PlayerPanel player;
-
+    private GameFrame gameFrame;
     private Work work;
 
     private int w;
     private int h;
     private int mine;
+
+    private Result result;
+
+
 
     public GamePanel(int weight, int height, int mine, GameFrame gameFrame){
 
@@ -28,7 +31,7 @@ public class GamePanel extends JPanel implements MouseListener {
         w = weight;
         h = height;
         this.mine = mine;
-        work = new Work(w, h, mine, this);
+        work = new Work(w, h, mine);
 
 
         // the layout for programmer
@@ -47,7 +50,6 @@ public class GamePanel extends JPanel implements MouseListener {
         player = new PlayerPanel(this);
         add(player, BorderLayout.CENTER);
         player.setBorder(BorderFactory.createLoweredBevelBorder());
-
 
 
 
@@ -74,28 +76,17 @@ public class GamePanel extends JPanel implements MouseListener {
         return work;
     }
 
-    public void setWork(Work work) {
-        this.work = work;
-    }
-
-    public GameFrame getGameFrame() {
-        return gameFrame;
-    }
-
     public int getMine() {
         return mine;
     }
 
-    public void setMine(int mine) {
-        this.mine = mine;
-    }
 
     public NotificationPanel getNotification() {
         return notification;
     }
 
-    public void setNotification(NotificationPanel notification) {
-        this.notification = notification;
+    public GameFrame getGameFrame() {
+        return gameFrame;
     }
 
     @Override
@@ -109,9 +100,12 @@ public class GamePanel extends JPanel implements MouseListener {
         notification.getSmileButton().repaint();
 
         CellButtons[][] resMarked = player.getResMarked();
+
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if (e.getButton() == 1 && e.getSource() == resMarked[i][j] && !work.getSetFlagVisited()[i][j]) { // right mouse
+                if (e.getButton() == 1 && e.getSource() == resMarked[i][j]
+                        && !work.getSetFlagVisited()[i][j]) { // right mouse
+
                     if (!notification.getTime().isRunning()) {
                         notification.getTime().start();
                     }
@@ -121,54 +115,25 @@ public class GamePanel extends JPanel implements MouseListener {
                         // Lost
                         if (work.isCompleted()) {
 
-                            notification.getTime().stop();
+                            result = new Loss();
 
-                            notification.getSmileButton().setStage(SmileButton.lose);
-                            notification.getSmileButton().repaint();
+                            result.outCome(this);
 
-                            int option = JOptionPane.showConfirmDialog(this,
-                                    "You Lost, play again?", "Notification",
-                                    JOptionPane.YES_NO_OPTION);
-                            if (option == JOptionPane.YES_OPTION) {
-                                gameFrame.setVisible(false);
-                                new GameFrame(w, h, mine);
-                            } else {
-                                work.setCompleted(true);
-                            }
                             // Win
                         } else if (work.isEnd()) {
 
-                            notification.getTime().stop();
+                            result = new Win();
 
-                            notification.getSmileButton().setStage(SmileButton.win);
-                            notification.getSmileButton().repaint();
-
-                            int option = JOptionPane.showConfirmDialog(this,
-                                    "You Win, play again?", "Notification",
-                                    JOptionPane.YES_NO_OPTION);
-                            if (option == JOptionPane.YES_OPTION) {
-                                gameFrame.setVisible(false);
-                                new GameFrame(w, h, mine);
-                            }
+                            result.outCome(this);
                         }
                     }
-                } if (e.getButton() == 2 && e.getSource() == resMarked[i][j]
+                } else if (e.getButton() == 2 && e.getSource() == resMarked[i][j]
                         && !work.getVisited()[i][j]) { // click Double
                     if (!work.clickDouble(i, j)) {
 
-                        notification.getTime().stop();
-                        notification.getSmileButton().setStage(SmileButton.lose);
-                        notification.getSmileButton().repaint();
+                        result = new Loss();
 
-                        int option = JOptionPane.showConfirmDialog(this,
-                                "You Lost, play again?", "Notification",
-                                JOptionPane.YES_NO_OPTION);
-                        if (option == JOptionPane.YES_OPTION) {
-                            gameFrame.setVisible(false);
-                            new GameFrame(w, h, mine);
-                        } else {
-                            work.setCompleted(true);
-                        }
+                        result.outCome(this);
                     }
                 } else if (e.getButton() == 3 && e.getSource() == resMarked[i][j]) { // setFlag
                     work.Flagging(i, j);

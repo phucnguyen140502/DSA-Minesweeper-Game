@@ -25,9 +25,6 @@ public class Work {
 
     private int[][] mineField;
 
-    private SmileButton smileButton;
-
-    private LabelNumber labelTime, labelResMine;
 
 
     private boolean[][] visited;
@@ -37,10 +34,10 @@ public class Work {
     private boolean isEnd;
 
     private int w, h, mine;
-    private GamePanel game;
+
     private int Flag;
-    public Work(int w, int h, int mine, GamePanel game){
-        this.game = game;
+    public Work(int w, int h, int mine){
+
         this.w = w;
         this.h = h;
         this.mine = mine;
@@ -130,13 +127,11 @@ public class Work {
                 setFlagVisited[i][j] = false;
                 mineFieldContainer[i][j].setNumber(-1);
                 mineFieldContainer[i][j].repaint();
-                game.getNotification().updateLabelMine();
             }else if (Flag < mine) {
                 Flag++;
                 setFlagVisited[i][j] = true;
                 mineFieldContainer[i][j].setNumber(9);
                 mineFieldContainer[i][j].repaint();
-                game.getNotification().updateLabelMine();
             }
         }
     }
@@ -326,29 +321,9 @@ public class Work {
         this.mineFieldContainer = mineFieldContainer;
     }
 
-    public SmileButton getSmileButton() {
-        return smileButton;
-    }
 
-    public void setSmileButton(SmileButton smileButton) {
-        this.smileButton = smileButton;
-    }
 
-    public LabelNumber getLabelTime() {
-        return labelTime;
-    }
 
-    public void setLabelTime(LabelNumber labelTime) {
-        this.labelTime = labelTime;
-    }
-
-    public LabelNumber getLabelResMine() {
-        return labelResMine;
-    }
-
-    public void setLabelResMine(LabelNumber labelResMine) {
-        this.labelResMine = labelResMine;
-    }
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;

@@ -1,22 +1,23 @@
 package view;
 
+import ui.LoadData;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SmileButton extends JButton {
 
-    public static final int win = 0;
-    public static final int lose = 1;
-    public static final int press = 2;
-    public static final int wow = 3;
-    public static final int now = 4;
+    public static final int now = 0;
+    public static final int press = 1;
+    public static final int wow = 2;
+    public static final int lose = 3;
+    public static final int win = 4;
 
-    private NotificationPanel notification;
-
+    private LoadData loadData;
     private int stage;
 
-    public SmileButton(NotificationPanel notificationPanel) {
-        notification = notificationPanel;
+    public SmileButton() {
+        loadData = new LoadData();
         setPreferredSize(new Dimension(50, 50));
     }
 
@@ -24,23 +25,23 @@ public class SmileButton extends JButton {
     public void  paint(Graphics g){
         switch (stage) {
             case win:
-                g.drawImage(notification.getGame().getGameFrame().getLoadData().getListImage().get("SmileWin"), 0, 0,
+                g.drawImage(loadData.getListImage().get("SmileWin"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case lose:
-                g.drawImage(notification.getGame().getGameFrame().getLoadData().getListImage().get("SmileLose"), 0, 0,
+                g.drawImage(loadData.getListImage().get("SmileLose"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case press:
-                g.drawImage(notification.getGame().getGameFrame().getLoadData().getListImage().get("SmilePress"), 0, 0,
+                g.drawImage(loadData.getListImage().get("SmilePress"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case wow:
-                g.drawImage(notification.getGame().getGameFrame().getLoadData().getListImage().get("SmilePressPlay"), 0, 0,
+                g.drawImage(loadData.getListImage().get("SmilePressPlay"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case now:
-                g.drawImage(notification.getGame().getGameFrame().getLoadData().getListImage().get("Smile"), 0, 0,
+                g.drawImage(loadData.getListImage().get("Smile"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
 

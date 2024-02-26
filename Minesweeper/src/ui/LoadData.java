@@ -61,7 +61,7 @@ public class LoadData {
             listImage.put("SmileWin", image.getSubimage(104, 55, 26, 26));
 
             //
-            listImage.put("tich", image.getSubimage(140, 49, 7, 7));
+            listImage.put("Mark", image.getSubimage(140, 49, 7, 7));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

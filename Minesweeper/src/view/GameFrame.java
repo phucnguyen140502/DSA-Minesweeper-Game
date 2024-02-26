@@ -32,11 +32,11 @@ public class GameFrame extends JFrame {
         menu.addSeparator();
         menu.add(exit = new JMenuItem("Exit"));
         if (w == 8) {
-            basic.setIcon(new ImageIcon(loadData.getListImage().get("tich")));
+            basic.setIcon(new ImageIcon(loadData.getListImage().get("Mark")));
         } else if (w == 16) {
-            normal.setIcon(new ImageIcon(loadData.getListImage().get("tich")));
+            normal.setIcon(new ImageIcon(loadData.getListImage().get("Mark")));
         } else {
-            hard.setIcon(new ImageIcon(loadData.getListImage().get("tich")));
+            hard.setIcon(new ImageIcon(loadData.getListImage().get("Mark")));
         }
 
         basic.addActionListener(new ActionListener() {

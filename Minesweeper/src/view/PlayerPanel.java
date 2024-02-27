@@ -2,25 +2,25 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
-public class PlayerPanel extends JPanel {
+public class PlayerPanel extends ObserverPanel {
 
-
-    private GamePanel game;
 
     private CellButtons[][] resMarked;
 
-    public PlayerPanel(GamePanel gamePanel) {
-        game = gamePanel;
+    public PlayerPanel(SubjectPanel subjectPanel) {
+        this.subjectPanel = subjectPanel;
+        this.subjectPanel.AttachObserver(this);
 
-        GridLayout PlayerLayout = new GridLayout(game.getW(), game.getH());
+        GridLayout PlayerLayout = new GridLayout(subjectPanel.getW(), subjectPanel.getH());
         setLayout(PlayerLayout);
 
-        resMarked = game.getWork().getMineFieldContainer();
+        resMarked = subjectPanel.getWork().getMineFieldContainer();
         setBorder(BorderFactory.createLoweredBevelBorder());
         // add the cells into mineField
-        for (int i = 0; i < game.getW(); i++) {
-            for (int j = 0; j < game.getH(); j++) {
+        for (int i = 0; i < subjectPanel.getW(); i++) {
+            for (int j = 0; j < subjectPanel.getH(); j++) {
                 // the cells in the mineField
                 resMarked[i][j] = new CellButtons();
                 resMarked[i][j].setPreferredSize(new Dimension(30, 30)); // the size of cells
@@ -29,20 +29,13 @@ public class PlayerPanel extends JPanel {
                 add(resMarked[i][j]);
 
                 //
-                resMarked[i][j].addMouseListener(game);
+                resMarked[i][j].addMouseListener((MouseListener) subjectPanel);
             }
         }
 
 
     }
 
-    public GamePanel getGame() {
-        return game;
-    }
-
-    public void setGame(GamePanel game) {
-        this.game = game;
-    }
 
     public CellButtons[][] getResMarked() {
         return resMarked;

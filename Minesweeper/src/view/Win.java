@@ -10,7 +10,8 @@ public class Win implements Result{
         game.getNotification().getSmileButton().repaint();
 
 
-        int option = JOptionPane.showConfirmDialog(game, "You win, play again ?", "Notification",
+        int option = JOptionPane.showConfirmDialog(game,
+                "You win, play again ?", "Notification",
                 JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             game.getGameFrame().setVisible(false);

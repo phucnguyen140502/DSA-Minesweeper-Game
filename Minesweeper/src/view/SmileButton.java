@@ -12,12 +12,11 @@ public class SmileButton extends JButton {
     public static final int wow = 2;
     public static final int lose = 3;
     public static final int win = 4;
-
-    private LoadData loadData;
+    
     private int stage;
 
     public SmileButton() {
-        loadData = new LoadData();
+
         setPreferredSize(new Dimension(50, 50));
     }
 
@@ -25,23 +24,23 @@ public class SmileButton extends JButton {
     public void  paint(Graphics g){
         switch (stage) {
             case win:
-                g.drawImage(loadData.getListImage().get("SmileWin"), 0, 0,
+                g.drawImage(LoadData.listImage.get("SmileWin"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case lose:
-                g.drawImage(loadData.getListImage().get("SmileLose"), 0, 0,
+                g.drawImage(LoadData.listImage.get("SmileLose"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case press:
-                g.drawImage(loadData.getListImage().get("SmilePress"), 0, 0,
+                g.drawImage(LoadData.listImage.get("SmilePress"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case wow:
-                g.drawImage(loadData.getListImage().get("SmilePressPlay"), 0, 0,
+                g.drawImage(LoadData.listImage.get("SmilePressPlay"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case now:
-                g.drawImage(loadData.getListImage().get("Smile"), 0, 0,
+                g.drawImage(LoadData.listImage.get("Smile"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
 

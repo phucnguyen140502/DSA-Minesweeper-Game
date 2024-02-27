@@ -7,82 +7,49 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GamePanel extends JPanel implements MouseListener{
+public class GamePanel extends SubjectPanel implements MouseListener{
 
-
-    private NotificationPanel notification;
-
-    private PlayerPanel player;
     private GameFrame gameFrame;
-    private Work work;
-
-    private int w;
-    private int h;
-    private int mine;
-
     private Result result;
 
 
 
     public GamePanel(int weight, int height, int mine, GameFrame gameFrame){
+        super(weight, height, mine, gameFrame);
 
         this.gameFrame = gameFrame;
 
-        w = weight;
-        h = height;
-        this.mine = mine;
-        work = new Work(w, h, mine);
 
 
         // the layout for programmer
+
         BorderLayout programmerLayout = new BorderLayout(15,15);
         setLayout(programmerLayout);
 
 
         // the content
-        notification = new NotificationPanel(this);
+        NotificationPanel notification = new NotificationPanel(this);
         add(notification, BorderLayout.NORTH);
         notification.setBorder(BorderFactory.createLoweredBevelBorder());
 
-
-
         // the mineField
-        player = new PlayerPanel(this);
+        PlayerPanel  player = new PlayerPanel(this);
         add(player, BorderLayout.CENTER);
         player.setBorder(BorderFactory.createLoweredBevelBorder());
 
 
 
+
     }
 
 
-    public int getW() {
-        return w;
-    }
 
-    public void setW(int w) {
-        this.w = w;
+    public PlayerPanel getPlayerPanel() {
+        return (PlayerPanel) observerPanel.get(1);
     }
-
-    public int getH() {
-        return h;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
-
-    public Work getWork() {
-        return work;
-    }
-
-    public int getMine() {
-        return mine;
-    }
-
 
     public NotificationPanel getNotification() {
-        return notification;
+        return (NotificationPanel) observerPanel.get(0);
     }
 
     public GameFrame getGameFrame() {
@@ -96,18 +63,18 @@ public class GamePanel extends JPanel implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        notification.getSmileButton().setStage(SmileButton.wow);
-        notification.getSmileButton().repaint();
+        getNotification().getSmileButton().setStage(SmileButton.wow);
+        getNotification().getSmileButton().repaint();
 
-        CellButtons[][] resMarked = player.getResMarked();
+        CellButtons[][] resMarked = getPlayerPanel().getResMarked();
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 if (e.getButton() == 1 && e.getSource() == resMarked[i][j]
                         && !work.getSetFlagVisited()[i][j]) { // right mouse
 
-                    if (!notification.getTime().isRunning()) {
-                        notification.getTime().start();
+                    if (!getNotification().getTime().isRunning()) {
+                        getNotification().getTime().start();
                     }
 
                     if (!work.open(i, j)) {
@@ -144,8 +111,8 @@ public class GamePanel extends JPanel implements MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        notification.getSmileButton().setStage(SmileButton.now);
-        notification.getSmileButton().repaint();
+        getNotification().getSmileButton().setStage(SmileButton.now);
+        getNotification().getSmileButton().repaint();
     }
 
     @Override

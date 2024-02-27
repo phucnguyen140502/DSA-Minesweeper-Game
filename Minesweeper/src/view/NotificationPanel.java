@@ -9,12 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class NotificationPanel extends JPanel {
+public class NotificationPanel extends ObserverPanel {
 
     private JPanel Time,Smile, resMine;
-
-    private final GamePanel game;
-
 
     private Timer time;
     private int nowTime;
@@ -22,9 +19,9 @@ public class NotificationPanel extends JPanel {
     private SmileButton smileButton;
     private LabelNumber labelTime, labelResMine;
 
-    public NotificationPanel(GamePanel gamePanel) {
-
-        game = gamePanel;
+    public NotificationPanel(SubjectPanel subjectPanel) {
+        this.subjectPanel = subjectPanel;
+        this.subjectPanel.AttachObserver(this);
 
         BorderLayout notificationLayout = new BorderLayout();
         setLayout(notificationLayout);
@@ -48,7 +45,10 @@ public class NotificationPanel extends JPanel {
         add(Smile, BorderLayout.CENTER);
         smileButton = new SmileButton();
         Smile.add(smileButton);
-        smileButton.addMouseListener(new MouseSmile(game, smileButton));
+        if (subjectPanel instanceof GamePanel) {
+            smileButton.addMouseListener(new MouseSmile((GamePanel) subjectPanel, smileButton));
+        }
+
 
 
         // the reMine
@@ -80,16 +80,18 @@ public class NotificationPanel extends JPanel {
     }
 
     public void updateLabelMine() {
-        int boomNUm = game.getMine() - game.getWork().getFlag();
-        String boom = String.valueOf(boomNUm);
-        if (boom.length() == 1) {
-            labelResMine.setNumber("00" + boom);
-        } else if (boom.length() == 2) {
-            labelResMine.setNumber("0" + boom);
-        } else {
-            labelResMine.setNumber("0" + boom);
+        if (subjectPanel instanceof GamePanel) {
+            int boomNUm = subjectPanel.getMine() - subjectPanel.getWork().getFlag();
+            String boom = String.valueOf(boomNUm);
+            if (boom.length() == 1) {
+                labelResMine.setNumber("00" + boom);
+            } else if (boom.length() == 2) {
+                labelResMine.setNumber("0" + boom);
+            } else {
+                labelResMine.setNumber("0" + boom);
+            }
+            labelResMine.repaint();
         }
-        labelResMine.repaint();
     }
 
 
@@ -102,8 +104,4 @@ public class NotificationPanel extends JPanel {
         return smileButton;
     }
 
-
-    public int getNowTime() {
-        return nowTime;
-    }
 }

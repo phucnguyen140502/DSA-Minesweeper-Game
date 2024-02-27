@@ -6,12 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LabelNumber extends JLabel {
-
-    private LoadData loadData;
+    
     private String number;
 
     public LabelNumber(String res) {
-        loadData = new LoadData();
         number = res;
         setPreferredSize(new Dimension(78, 46));
     }
@@ -28,18 +26,18 @@ public class LabelNumber extends JLabel {
     @Override
     public void  paint(Graphics g){
         if (number.equals("Infinity")) {
-            g.drawImage(loadData.getListImage().get("Infinity"),
+            g.drawImage(LoadData.listImage.get("Infinity"),
                     0, 0, 26, 46, null);
-            g.drawImage(loadData.getListImage().get("Infinity"),
+            g.drawImage(LoadData.listImage.get("Infinity"),
                     26, 0, 26, 46, null);
-            g.drawImage(loadData.getListImage().get("Infinity"),
+            g.drawImage(LoadData.listImage.get("Infinity"),
                     52, 0, 26, 46, null);
         } else {
-            g.drawImage(loadData.getListImage().get(String.valueOf(number.charAt(0))),
+            g.drawImage(LoadData.listImage.get(String.valueOf(number.charAt(0))),
                     0, 0, 26, 46, null);
-            g.drawImage(loadData.getListImage().get(String.valueOf(number.charAt(1))),
+            g.drawImage(LoadData.listImage.get(String.valueOf(number.charAt(1))),
                     26, 0, 26, 46, null);
-            g.drawImage(loadData.getListImage().get(String.valueOf(number.charAt(2))),
+            g.drawImage(LoadData.listImage.get(String.valueOf(number.charAt(2))),
                     52, 0, 26, 46, null);
         }
     }

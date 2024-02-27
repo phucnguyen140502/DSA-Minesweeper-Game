@@ -10,13 +10,14 @@ public class Loss implements Result{
 
     @Override
     public void outCome(GamePanel game) {
+
         game.getNotification().getSmileButton().setStage(SmileButton.lose);
         game.getNotification().getSmileButton().repaint();
 
-        int option = JOptionPane.showConfirmDialog(null,
+        int option = JOptionPane.showConfirmDialog(game,
                 "You lost, play again?", "Notification",
                 JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.OK_CANCEL_OPTION) {
+        if (option == JOptionPane.YES_OPTION) {
             game.getGameFrame().setVisible(false);
             new GameFrame(game.getW(), game.getH(), game.getMine());
         } else {

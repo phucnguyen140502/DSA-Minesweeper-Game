@@ -284,7 +284,6 @@ public class Work {
 
 
     public void createMineField(){
-
         int count;
         do{
             int locationX = random.nextInt(w);

@@ -9,7 +9,7 @@ import java.util.Hashtable;
 
 public class LoadData {
 
-    private Hashtable<String, BufferedImage> listImage;
+    public static Hashtable<String, BufferedImage> listImage;
 
     public LoadData() {
         listImage = new Hashtable<>();
@@ -65,13 +65,5 @@ public class LoadData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Hashtable<String, BufferedImage> getListImage() {
-        return listImage;
-    }
-
-    public void setListImage(Hashtable<String, BufferedImage> listImage) {
-        this.listImage = listImage;
     }
 }

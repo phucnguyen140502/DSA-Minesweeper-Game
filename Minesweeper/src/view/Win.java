@@ -10,22 +10,11 @@ public class Win implements Result{
         game.getNotification().getSmileButton().repaint();
 
 
-        int option = JOptionPane.showOptionDialog(game,
-                "You Win!!!\nThời gian: " + String.format("%02d:%02d",
-                        game.getNotification().getNowTime()/60, game.getNotification().getNowTime()%60),
-                "Notification",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                new String[]{"Restart", "Trở về menu"}, // this is the array
-                "default");
-
-        if (option == JOptionPane.OK_CANCEL_OPTION) {
+        int option = JOptionPane.showConfirmDialog(game, "You win, play again ?", "Notification",
+                JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
             game.getGameFrame().setVisible(false);
             new GameFrame(game.getW(), game.getH(), game.getMine());
-        } else {
-            game.getGameFrame().setVisible(false);
-            new MenuGame();
         }
     }
 }

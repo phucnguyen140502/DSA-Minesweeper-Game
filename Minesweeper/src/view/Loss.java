@@ -13,20 +13,14 @@ public class Loss implements Result{
         game.getNotification().getSmileButton().setStage(SmileButton.lose);
         game.getNotification().getSmileButton().repaint();
 
-        int option = JOptionPane.showOptionDialog(game,
-                "Bạn đã thua!!!",
-                "Thông báo",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                new String[]{"Restart", "Trở về menu"}, // this is the array
-                "default");
+        int option = JOptionPane.showConfirmDialog(null,
+                "You lost, play again?", "Notification",
+                JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.OK_CANCEL_OPTION) {
             game.getGameFrame().setVisible(false);
             new GameFrame(game.getW(), game.getH(), game.getMine());
         } else {
-            game.getGameFrame().setVisible(false);
-            new MenuGame();
+            game.getWork().setCompleted(true);
         }
     }
 

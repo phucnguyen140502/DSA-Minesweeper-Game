@@ -1,6 +1,6 @@
 package view;
 
-import ui.LoadData;
+import ui.LoadImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,25 +22,26 @@ public class SmileButton extends JButton {
 
     @Override
     public void  paint(Graphics g){
+        LoadImage.loadData();
         switch (stage) {
             case win:
-                g.drawImage(LoadData.listImage.get("SmileWin"), 0, 0,
+                g.drawImage(LoadImage.listImage.get("SmileWin"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case lose:
-                g.drawImage(LoadData.listImage.get("SmileLose"), 0, 0,
+                g.drawImage(LoadImage.listImage.get("SmileLose"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case press:
-                g.drawImage(LoadData.listImage.get("SmilePress"), 0, 0,
+                g.drawImage(LoadImage.listImage.get("SmilePress"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case wow:
-                g.drawImage(LoadData.listImage.get("SmilePressPlay"), 0, 0,
+                g.drawImage(LoadImage.listImage.get("SmilePressPlay"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
             case now:
-                g.drawImage(LoadData.listImage.get("Smile"), 0, 0,
+                g.drawImage(LoadImage.listImage.get("Smile"), 0, 0,
                         getPreferredSize().width, getPreferredSize().height, null);
                 break;
 

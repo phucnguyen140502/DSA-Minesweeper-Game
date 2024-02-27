@@ -1,5 +1,7 @@
 package view;
 
+import ui.LoadAudio;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,6 +15,8 @@ public class Loss implements Result{
 
         game.getNotification().getSmileButton().setStage(SmileButton.lose);
         game.getNotification().getSmileButton().repaint();
+        LoadAudio.LoadData();
+        LoadAudio.playLose();
 
         int option = JOptionPane.showConfirmDialog(game,
                 "You lost, play again?", "Notification",

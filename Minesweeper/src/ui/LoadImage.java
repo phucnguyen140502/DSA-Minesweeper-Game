@@ -1,21 +1,20 @@
 package ui;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class LoadData {
+public class LoadImage {
 
     public static Hashtable<String, BufferedImage> listImage;
 
-    public LoadData() {
+    public static void loadData() {
         listImage = new Hashtable<>();
 
         try {
-            BufferedImage image = ImageIO.read(new File("assets/minesweeper.png"));
+            BufferedImage image = ImageIO.read(new File("assets/image/minesweeper.png"));
 
             // the title
             listImage.put("Title", image.getSubimage(0, 84, 114, 25));

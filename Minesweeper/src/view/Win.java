@@ -1,5 +1,7 @@
 package view;
 
+import ui.LoadAudio;
+
 import javax.swing.*;
 
 public class Win implements Result{
@@ -8,7 +10,8 @@ public class Win implements Result{
     public void outCome(GamePanel game) {
         game.getNotification().getSmileButton().setStage(SmileButton.win);
         game.getNotification().getSmileButton().repaint();
-
+        LoadAudio.LoadData();
+        LoadAudio.playWin();
 
         int option = JOptionPane.showConfirmDialog(game,
                 "You win, play again ?", "Notification",

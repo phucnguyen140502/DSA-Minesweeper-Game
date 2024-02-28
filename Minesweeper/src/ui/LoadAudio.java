@@ -49,22 +49,6 @@ public class LoadAudio {
             Clip winClip = AudioSystem.getClip();
             winClip.open(win);
 
-            AudioInputStream startInputStream = AudioSystem.getAudioInputStream(new File("assets/audio/start.wav"));
-            AudioFormat startBaseFormat = startInputStream.getFormat();
-            AudioFormat startDecodeFormat = new AudioFormat(
-                    AudioFormat.Encoding.PCM_SIGNED,
-                    startBaseFormat.getSampleRate(),
-                    16,
-                    startBaseFormat.getChannels(),
-                    startBaseFormat.getChannels() * 2,
-                    startBaseFormat.getSampleRate(),
-                    false
-            );
-            AudioInputStream start =
-                    AudioSystem.getAudioInputStream(
-                            startDecodeFormat, startInputStream);
-            Clip startClip = AudioSystem.getClip();
-            startClip.open(start);
 
             AudioInputStream tapInputStream = AudioSystem.getAudioInputStream(new File("assets/audio/tap.wav"));
             AudioFormat tapBaseFormat = tapInputStream.getFormat();
@@ -85,7 +69,6 @@ public class LoadAudio {
 
             listAudio.put("Lose", loseClip);
             listAudio.put("Win", winClip);
-            listAudio.put("Start",startClip);
             listAudio.put("Tap",tapClip);
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -101,9 +84,6 @@ public class LoadAudio {
         listAudio.get("Win").start();
     }
 
-    public static void playStart(){
-        listAudio.get("Start").start();
-    }
 
 
     public static void playTap(){

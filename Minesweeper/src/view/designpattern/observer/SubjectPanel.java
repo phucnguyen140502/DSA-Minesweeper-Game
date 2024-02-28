@@ -1,10 +1,11 @@
-package view;
+package view.designpattern.observer;
 
 import control.Work;
+import view.GameFrame;
+import view.designpattern.observer.ObserverPanel;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Observer;
 
 public abstract class SubjectPanel extends Panel {
 

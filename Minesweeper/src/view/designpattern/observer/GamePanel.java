@@ -1,7 +1,10 @@
-package view;
+package view.designpattern.observer;
 
-import control.Work;
 import ui.LoadAudio;
+import view.*;
+import view.designpattern.strategy.Loss;
+import view.designpattern.strategy.Result;
+import view.designpattern.strategy.Win;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +37,7 @@ public class GamePanel extends SubjectPanel implements MouseListener{
         notification.setBorder(BorderFactory.createLoweredBevelBorder());
 
         // the mineField
-        PlayerPanel  player = new PlayerPanel(this);
+        PlayerPanel player = new PlayerPanel(this);
         add(player, BorderLayout.CENTER);
         player.setBorder(BorderFactory.createLoweredBevelBorder());
 

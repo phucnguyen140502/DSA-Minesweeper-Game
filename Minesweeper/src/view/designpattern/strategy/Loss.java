@@ -1,13 +1,15 @@
-package view;
+package view.designpattern.strategy;
 
 import ui.LoadAudio;
+import view.GameFrame;
+import view.designpattern.observer.GamePanel;
+import view.SmileButton;
 
 import javax.swing.*;
-import java.awt.*;
 
 import static com.sun.org.apache.xerces.internal.util.DOMUtil.setVisible;
 
-public class Loss implements Result{
+public class Loss implements Result {
 
 
     @Override

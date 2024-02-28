@@ -1,10 +1,13 @@
-package view;
+package view.designpattern.strategy;
 
 import ui.LoadAudio;
+import view.GameFrame;
+import view.designpattern.observer.GamePanel;
+import view.SmileButton;
 
 import javax.swing.*;
 
-public class Win implements Result{
+public class Win implements Result {
 
     @Override
     public void outCome(GamePanel game) {

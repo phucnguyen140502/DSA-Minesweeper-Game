@@ -1,12 +1,15 @@
 package view;
 
 import ui.LoadImage;
+import view.designpattern.observer.GamePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame{
+
 
     private JMenuBar mnb;
 
@@ -17,7 +20,7 @@ public class GameFrame extends JFrame {
     public GameFrame(int w, int h, int mine) {
 
 
-        setJMenuBar(mnb = new JMenuBar());
+
         mnb.add(menu = new JMenu("Level"));
         menu.addSeparator();
 
@@ -25,15 +28,32 @@ public class GameFrame extends JFrame {
         NormalState();
         HardState();
 
-        LoadImage.loadData();
-        if (h == 20) {
+
+        if (h == 8) {
             basic.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
-        } else if (h == 30) {
+        } else if (h == 16) {
             normal.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
         } else {
             hard.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
         }
 
+
+
+        LoadImage.loadData();
+        setJMenuBar(mnb = new JMenuBar());
+        mnb.add(menu = new JMenu("Level"));
+        menu.addSeparator();
+        menu.add(basic);
+        menu.add(normal);
+        menu.add(hard);
+
+        if (h == 8) {
+            basic.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+        } else if (h == 16) {
+            normal.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+        } else {
+            hard.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+        }
 
         setTitle("Minesweeper");
 
@@ -44,7 +64,11 @@ public class GameFrame extends JFrame {
         setResizable(false);
         pack();
         setVisible(true);
+
+
     }
+
+
 
 
     private void BasicState() {
@@ -54,7 +78,7 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(20, 20, 20);
+                new GameFrame(8,8,10);
             }
         });
 
@@ -67,7 +91,7 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(20, 30, 50);
+                new GameFrame(16,16,40);
             }
         });
     }
@@ -79,7 +103,7 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(20, 40, 80);
+                new GameFrame(16,30,99);
             }
         });
 

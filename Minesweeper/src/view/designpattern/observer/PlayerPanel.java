@@ -1,4 +1,6 @@
-package view;
+package view.designpattern.observer;
+
+import view.CellButtons;
 
 import javax.swing.*;
 import java.awt.*;

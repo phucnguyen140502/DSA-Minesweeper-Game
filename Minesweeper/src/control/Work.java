@@ -2,13 +2,6 @@ package control;
 
 import view.CellButtons;
 
-import view.GamePanel;
-import view.LabelNumber;
-import view.SmileButton;
-
-import view.LabelNumber;
-import view.SmileButton;
-
 
 import java.util.Arrays;
 import java.util.LinkedList;

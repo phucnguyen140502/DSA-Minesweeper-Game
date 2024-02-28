@@ -1,4 +1,4 @@
-package view;
+package view.designpattern.observer;
 
 import javax.swing.*;
 

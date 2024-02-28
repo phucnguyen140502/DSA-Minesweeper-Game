@@ -72,9 +72,10 @@ public class GamePanel extends SubjectPanel implements MouseListener{
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
+                LoadAudio.playTap();
                 if (e.getButton() == 1 && e.getSource() == resMarked[i][j]
                         && !work.getSetFlagVisited()[i][j]) { // right mouse
-                    LoadAudio.playTap();
+
                     if (!getNotification().getTime().isRunning()) {
                         getNotification().getTime().start();
                     }
@@ -98,7 +99,7 @@ public class GamePanel extends SubjectPanel implements MouseListener{
                     }
                 } else if (e.getButton() == 2 && e.getSource() == resMarked[i][j]
                         && !work.getVisited()[i][j]) { // click Double
-                    LoadAudio.playTap();
+
                     if (!work.clickDouble(i, j)) {
 
                         result = new Loss();

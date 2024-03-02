@@ -1,7 +1,6 @@
 package ui;
 
 import javax.sound.sampled.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
@@ -13,8 +12,6 @@ public class LoadAudio {
         listAudio = new Hashtable<>();
 
         try {
-
-
             AudioInputStream loseInputStream = AudioSystem.getAudioInputStream(new File("assets/audio/lose.wav"));
             AudioFormat loseBaseFormat = loseInputStream.getFormat();
             AudioFormat loseDecodeFormat = new AudioFormat(

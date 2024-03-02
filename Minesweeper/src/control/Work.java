@@ -28,6 +28,9 @@ public class Work {
 
     private int w, h, mine;
 
+    private int[] drow = new int[]{0, 0, -1, 1, 1, -1, 1, -1};
+    private int[] dcol = new int[]{-1, 1, 0, 0, 1, -1, -1, 1};
+
     private int Flag;
     public Work(int w, int h, int mine){
 
@@ -75,9 +78,6 @@ public class Work {
     public boolean clickDouble(int i, int j) {
 
         boolean isMine = false;
-
-        int[] drow = new int[]{0, 0, -1, 1, 1, -1, 1, -1};
-        int[] dcol = new int[]{-1, 1, 0, 0, 1, -1, -1, 1};
 
         for (int k = 0; k < 8; k++) {
             int x = i + drow[k];
@@ -245,8 +245,6 @@ public class Work {
 
         visited[startX][startY] = true;
 
-        int[] drow = new int[]{0,0,-1,1,1,-1,1,-1};
-        int[] dcol = new int[]{-1,1,0,0,1,-1,-1,1};
         queue.add(start);
 
         while (!queue.isEmpty()){
@@ -309,25 +307,12 @@ public class Work {
         return mineFieldContainer;
     }
 
-    public void setMineFieldContainer(CellButtons[][] mineFieldContainer) {
-        this.mineFieldContainer = mineFieldContainer;
-    }
-
-
-
-
-
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
 
-
     public boolean isEnd() {
         return isEnd;
-    }
-
-    public void setEnd(boolean end) {
-        isEnd = end;
     }
 
     public boolean isCompleted() {
@@ -340,10 +325,6 @@ public class Work {
 
     public boolean[][] getVisited() {
         return visited;
-    }
-
-    public void setFlag(int flag) {
-        Flag = flag;
     }
 
     public int getFlag() {

@@ -6,7 +6,6 @@ import view.designpattern.observer.GamePanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class GameFrame extends JFrame{
 
@@ -15,27 +14,9 @@ public class GameFrame extends JFrame{
 
     private JMenu menu;
 
-    private JMenuItem basic, normal, hard;
+    private JMenuItem Beginner, Intermediate, Expert;
 
     public GameFrame(int w, int h, int mine) {
-
-
-
-        mnb.add(menu = new JMenu("Level"));
-        menu.addSeparator();
-
-        BasicState();
-        NormalState();
-        HardState();
-
-
-        if (h == 8) {
-            basic.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
-        } else if (h == 16) {
-            normal.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
-        } else {
-            hard.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
-        }
 
 
 
@@ -43,16 +24,17 @@ public class GameFrame extends JFrame{
         setJMenuBar(mnb = new JMenuBar());
         mnb.add(menu = new JMenu("Level"));
         menu.addSeparator();
-        menu.add(basic);
-        menu.add(normal);
-        menu.add(hard);
 
-        if (h == 8) {
-            basic.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+        BeginnerState();
+        IntermediateState();
+        ExpertState();
+
+        if (h == 9) {
+            Beginner.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
         } else if (h == 16) {
-            normal.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+            Intermediate.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
         } else {
-            hard.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
+            Expert.setIcon(new ImageIcon(LoadImage.listImage.get("Mark")));
         }
 
         setTitle("Minesweeper");
@@ -71,41 +53,41 @@ public class GameFrame extends JFrame{
 
 
 
-    private void BasicState() {
-        menu.add(basic = new JMenuItem("Basic"));
-        basic.addActionListener(new ActionListener() {
+    private void BeginnerState() {
+        menu.add(Beginner = new JMenuItem("Beginner"));
+        Beginner.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(8,8,10);
+                new GameFrame(9,9,10);
             }
         });
 
     }
 
-    private void NormalState() {
-        menu.add(normal = new JMenuItem("Normal"));
-        normal.addActionListener(new ActionListener() {
+    private void IntermediateState() {
+        menu.add(Intermediate = new JMenuItem("Intermediate"));
+        Intermediate.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(16,16,40);
+                new GameFrame(16,16,4000);
             }
         });
     }
 
-    private void HardState() {
-        menu.add(hard = new JMenuItem("Hard"));
-        hard.addActionListener(new ActionListener() {
+    private void ExpertState() {
+        menu.add(Expert = new JMenuItem("Expert"));
+        Expert.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new GameFrame(16,30,99);
+                new GameFrame(25,30,50000);
             }
         });
-
     }
+
 }

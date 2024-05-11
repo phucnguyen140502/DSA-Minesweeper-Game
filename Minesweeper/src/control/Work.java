@@ -18,8 +18,6 @@ public class Work {
 
     private int[][] mineField;
 
-
-
     private boolean[][] visited;
     private final boolean[][] setFlagVisited;
 
@@ -33,11 +31,9 @@ public class Work {
 
     private int Flag;
     public Work(int w, int h, int mine){
-
         this.w = w;
         this.h = h;
         this.mine = mine;
-
 
         mineFieldContainer = new CellButtons[w][h];
         mineField = new int[w][h];
@@ -46,18 +42,13 @@ public class Work {
         for (int j = 0; j < w; j++) {
             Arrays.fill(visited[j], false);
             Arrays.fill(setFlagVisited[j], false);
-
         }
 
         random = new Random();
 
-
         createMineField();
 
         FillNumber();
-
-
-
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
@@ -73,7 +64,6 @@ public class Work {
 //            System.out.println();
 //        }
     }
-
 
     public boolean clickDouble(int i, int j) {
 
@@ -147,10 +137,6 @@ public class Work {
 
                         return false;
                     }
-
-
-                    int[] drow = new int[]{0, 0, -1, 1, 1, -1, 1, -1};
-                    int[] dcol = new int[]{-1, 1, 0, 0, 1, -1, -1, 1};
 
                     for (int k = 0; k < 8; k++) {
                         int x = i + drow[k];
@@ -270,9 +256,7 @@ public class Work {
             }
 
         }
-
     }
-
 
     public void createMineField(){
         int count;

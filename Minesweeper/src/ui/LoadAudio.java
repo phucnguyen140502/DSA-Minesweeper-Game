@@ -3,13 +3,12 @@ package ui;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
 
 public class LoadAudio {
-    public static Hashtable<String, Clip> listAudio;
+    public static HashTable<String, Clip> listAudio;
 
     public static void LoadData() {
-        listAudio = new Hashtable<>();
+        listAudio = new HashTable<>(3);
 
         try {
             AudioInputStream loseInputStream = AudioSystem.getAudioInputStream(new File("assets/audio/lose.wav"));

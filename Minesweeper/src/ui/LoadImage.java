@@ -8,10 +8,10 @@ import java.util.Hashtable;
 
 public class LoadImage {
 
-    public static Hashtable<String, BufferedImage> listImage;
+    public static HashTable<String, BufferedImage> listImage;
 
     public static void loadData() {
-        listImage = new Hashtable<>();
+        listImage = new HashTable<>(35);
 
         try {
             BufferedImage image = ImageIO.read(new File("assets/image/minesweeper.png"));

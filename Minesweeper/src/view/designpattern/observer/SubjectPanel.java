@@ -15,13 +15,13 @@ public abstract class SubjectPanel extends Panel {
     protected int mine;
     protected Work work;
 
-    public SubjectPanel(int weight, int height, int mine, GameFrame gameFrame) {
+    public SubjectPanel(int weight, int height, int mine) {
 
         w = weight;
         h = height;
         this.mine = mine;
 
-        work = new Work(w, h, mine);
+        work = Work.getInstance(w, h, mine);
 
 
     }

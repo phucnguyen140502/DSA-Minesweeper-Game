@@ -19,12 +19,9 @@ public class GamePanel extends SubjectPanel implements MouseListener{
 
 
     public GamePanel(int weight, int height, int mine, GameFrame gameFrame){
-        super(weight, height, mine, gameFrame);
+        super(weight, height, mine);
 
         this.gameFrame = gameFrame;
-
-
-
         // the layout for programmer
 
         BorderLayout programmerLayout = new BorderLayout(15,15);
@@ -40,9 +37,6 @@ public class GamePanel extends SubjectPanel implements MouseListener{
         PlayerPanel player = new PlayerPanel(this);
         add(player, BorderLayout.CENTER);
         player.setBorder(BorderFactory.createLoweredBevelBorder());
-
-
-
 
     }
 

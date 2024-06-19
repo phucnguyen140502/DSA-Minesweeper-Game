@@ -28,7 +28,7 @@ public class MouseSmile extends JPanel implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (game.getWork().isEnd() || game.getWork().isCompleted()) {
             game.getGameFrame().setVisible(false);
-            new GameFrame(game.getW(), game.getH(), game.getMine());
+            GameFrame.getInstance(game.getW(), game.getH(), game.getMine());
         } else {
             smileButton.setStage(SmileButton.press);
             smileButton.repaint();
@@ -45,7 +45,7 @@ public class MouseSmile extends JPanel implements MouseListener {
                 JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             game.getGameFrame().setVisible(false);
-            new GameFrame(game.getW(), game.getH(), game.getMine());
+            GameFrame.getInstance(game.getW(), game.getH(), game.getMine());
         }
     }
 

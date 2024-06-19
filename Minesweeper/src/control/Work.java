@@ -2,17 +2,15 @@ package control;
 
 import view.CellButtons;
 
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-// Apply BFS ( Breadth-First Search)
-
 public class Work {
 
-    private Random random; // mine is -1
+    private static Work instance;
+    private Random random;
 
     private CellButtons[][] mineFieldContainer;
 
@@ -30,7 +28,9 @@ public class Work {
     private int[] dcol = new int[]{-1, 1, 0, 0, 1, -1, -1, 1};
 
     private int Flag;
-    public Work(int w, int h, int mine){
+
+    // Private constructor to prevent instantiation from outside the class
+    private Work(int w, int h, int mine) {
         this.w = w;
         this.h = h;
         this.mine = mine;
@@ -47,26 +47,24 @@ public class Work {
         random = new Random();
 
         createMineField();
-
         FillNumber();
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                System.out.print(mineField[i][j] +" ");
+                System.out.print(mineField[i][j] + " ");
             }
             System.out.println();
         }
         System.out.println("--------------------------");
-//        for (int i = 0; i < w; i++) {
-//            for (int j = 0; j < h; j++) {
-//                System.out.print(visited[i][j] +" ");
-//            }
-//            System.out.println();
-//        }
+    }
+
+    // Public method to provide access to the instance
+    public static synchronized Work getInstance(int w, int h, int mine) {
+        instance = new Work(w, h, mine);
+        return instance;
     }
 
     public boolean clickDouble(int i, int j) {
-
         boolean isMine = false;
 
         for (int k = 0; k < 8; k++) {
@@ -102,15 +100,14 @@ public class Work {
         return true;
     }
 
-
-    public void Flagging(int i, int j){
+    public void Flagging(int i, int j) {
         if (visited[i][j]) {
             if (setFlagVisited[i][j]) {
                 Flag--;
                 setFlagVisited[i][j] = false;
                 mineFieldContainer[i][j].setNumber(-1);
                 mineFieldContainer[i][j].repaint();
-            }else if (Flag < mine) {
+            } else if (Flag < mine) {
                 Flag++;
                 setFlagVisited[i][j] = true;
                 mineFieldContainer[i][j].setNumber(9);
@@ -119,25 +116,17 @@ public class Work {
         }
     }
 
-    // Apply BFS Algorithm and matrix to open when click to cell "0" using recursion
     public boolean open(int i, int j) {
-
         if (!isCompleted && !isEnd) {
-
-
             if (visited[i][j]) {
-                if (mineField[i][j] == 0) { // open around until the cells have mines around
-
+                if (mineField[i][j] == 0) {
                     visited[i][j] = false;
                     mineFieldContainer[i][j].setNumber(0);
                     mineFieldContainer[i][j].repaint();
-
                     if (isWin()) {
                         isEnd = true;
-
                         return false;
                     }
-
                     for (int k = 0; k < 8; k++) {
                         int x = i + drow[k];
                         int y = j + dcol[k];
@@ -148,7 +137,6 @@ public class Work {
                     }
                     if (isWin()) {
                         isEnd = true;
-
                         return false;
                     }
                 } else {
@@ -157,15 +145,11 @@ public class Work {
                     if (num != -1) {
                         mineFieldContainer[i][j].setNumber(num);
                         mineFieldContainer[i][j].repaint();
-
-
                         if (isWin()) {
                             isEnd = true;
-
                             return false;
                         }
                         return true;
-
                     }
                 }
             }
@@ -173,36 +157,27 @@ public class Work {
                 mineFieldContainer[i][j].setNumber(11); // BoomRed
                 mineFieldContainer[i][j].repaint();
                 isCompleted = true;
-
-
                 for (int k = 0; k < w; k++) {
                     for (int l = 0; l < h; l++) {
                         if (mineField[k][l] == -1 && visited[k][l]) {
                             if (k != i || l != j) {
                                 mineFieldContainer[k][l].setNumber(10); // Boom
                                 mineFieldContainer[k][l].repaint();
-
                             }
                         }
                     }
                 }
                 return false;
-
             } else {
                 if (isWin()) {
                     isEnd = true;
-
                     return false;
                 }
-
                 return true;
             }
-
         }
         return false;
-
     }
-
 
     public boolean isWin() {
         int count = 0;
@@ -216,12 +191,11 @@ public class Work {
         return count == mine;
     }
 
-    // apply BFS algorithm and matrix algorithm without recursion
-    private boolean isValid(int ux, int vy){
-        return (0 <= ux && ux < w) && (0<=vy && vy < h);
+    private boolean isValid(int ux, int vy) {
+        return (0 <= ux && ux < w) && (0 <= vy && vy < h);
     }
-    public void FillNumber(){
 
+    public void FillNumber() {
         Queue<Cells> queue = new LinkedList<>();
 
         Cells start = new Cells(0, 0);
@@ -233,7 +207,7 @@ public class Work {
 
         queue.add(start);
 
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Cells cells = queue.poll();
             int countMines = 0;
             int u = cells.getX();
@@ -246,7 +220,6 @@ public class Work {
                 if (isValid(ux, vy) && mineField[ux][vy] == -1) {
                     countMines++;
                 } else if (isValid(ux, vy) && mineField[ux][vy] == 0 && !visited[ux][vy]) {
-
                     queue.add(new Cells(ux, vy));
                     visited[ux][vy] = true;
                 }
@@ -254,13 +227,12 @@ public class Work {
             if (mineField[u][v] != -1) {
                 mineField[u][v] = countMines;
             }
-
         }
     }
 
-    public void createMineField(){
+    public void createMineField() {
         int count;
-        do{
+        do {
             int locationX = random.nextInt(w);
             int locationY = random.nextInt(h);
             if (mineField[locationX][locationY] == -1) {
@@ -274,18 +246,11 @@ public class Work {
                 for (int j = 0; j < h; j++) {
                     if (mineField[i][j] == -1) {
                         count++;
-
                     }
                 }
             }
-
-        }while (count != mine);
-
-
-
-
+        } while (count != mine);
     }
-
 
     public CellButtons[][] getMineFieldContainer() {
         return mineFieldContainer;
@@ -314,5 +279,4 @@ public class Work {
     public int getFlag() {
         return Flag;
     }
-
 }

@@ -21,7 +21,7 @@ public class Win implements Result {
                 JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             game.getGameFrame().setVisible(false);
-            new GameFrame(game.getW(), game.getH(), game.getMine());
+            GameFrame.getInstance(game.getW(), game.getH(), game.getMine());
         }
     }
 }

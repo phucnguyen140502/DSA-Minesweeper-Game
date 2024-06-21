@@ -47,23 +47,4 @@ public class HashTable<K, V> {
         }
         return null;
     }
-
-    public void remove(K key) {
-        int hash = hash(key);
-        Entry<K, V> current = table[hash];
-        Entry<K, V> previous = null;
-
-        while (current != null) {
-            if (current.getKey().equals(key)) {
-                if (previous == null) {
-                    table[hash] = current.getNext();
-                } else {
-                    previous.setNext(current.getNext());
-                }
-                return;
-            }
-            previous = current;
-            current = current.getNext();
-        }
-    }
 }
